@@ -1,6 +1,6 @@
 # Separador de Frames
 
-Código para separar frames en un video, se puede elegir cada cuantos frames se hace el corte siendo el mínimo frame a frame y convertirlos en fotos esos frames y guardarlos.
+Código para separar frames en un video, se puede elegir cada cuántos frames se hace el corte siendo el mínimo frame a frame y convertirlos en fotos esos frames y guardarlos.
 
 ## Descripción
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Separador de Frames
-Script para extraer frames de un video y guardarlos como imagenes.
+Script para extraer frames de un video y guardarlos como imágenes.
 """
 
 import cv2
@@ -12,15 +12,15 @@ import sys
 
 def separar_frames(video_path, output_dir, frame_interval=1):
     """
-    Extrae frames de un video y los guarda como imagenes.
+    Extrae frames de un video y los guarda como imágenes.
     
     Args:
         video_path (str): Ruta al archivo de video
         output_dir (str): Directorio donde guardar los frames
-        frame_interval (int): Intervalo entre frames a extraer (minimo 1)
+        frame_interval (int): Intervalo entre frames a extraer (mínimo 1)
     
     Returns:
-        int: Numero de frames guardados
+        int: Número de frames guardados
     """
     # Verificar que el video existe
     if not os.path.exists(video_path):
@@ -44,15 +44,18 @@ def separar_frames(video_path, output_dir, frame_interval=1):
         print(f"Error: No se pudo abrir el video '{video_path}'.")
         return 0
     
-    # Obtener informacion del video
+    # Obtener información del video
     total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
     fps = video.get(cv2.CAP_PROP_FPS)
     
-    print(f"\nInformacion del video:")
+    # Calcular frames a extraer correctamente
+    frames_a_extraer = (total_frames + frame_interval - 1) // frame_interval
+    
+    print(f"\nInformación del video:")
     print(f"  - Total de frames: {total_frames}")
     print(f"  - FPS: {fps:.2f}")
-    print(f"  - Intervalo de extraccion: cada {frame_interval} frame(s)")
-    print(f"  - Frames a extraer: {total_frames // frame_interval}\n")
+    print(f"  - Intervalo de extracción: cada {frame_interval} frame(s)")
+    print(f"  - Frames a extraer: {frames_a_extraer}\n")
     
     frame_count = 0
     saved_count = 0
@@ -91,9 +94,9 @@ def separar_frames(video_path, output_dir, frame_interval=1):
 
 
 def main():
-    """Funcion principal con interfaz de linea de comandos."""
+    """Función principal con interfaz de línea de comandos."""
     parser = argparse.ArgumentParser(
-        description='Separador de frames de video. Extrae frames de un video y los guarda como imagenes.',
+        description='Separador de frames de video. Extrae frames de un video y los guarda como imágenes.',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Ejemplos de uso:
@@ -115,19 +118,19 @@ Ejemplos de uso:
     
     parser.add_argument(
         'output',
-        help='Directorio donde guardar los frames extraidos'
+        help='Directorio donde guardar los frames extraídos'
     )
     
     parser.add_argument(
         '-i', '--interval',
         type=int,
         default=1,
-        help='Intervalo entre frames a extraer (minimo 1, por defecto: 1 = frame a frame)'
+        help='Intervalo entre frames a extraer (mínimo 1, por defecto: 1 = frame a frame)'
     )
     
     args = parser.parse_args()
     
-    # Ejecutar la extraccion de frames
+    # Ejecutar la extracción de frames
     try:
         frames_guardados = separar_frames(args.video, args.output, args.interval)
         
