@@ -8,11 +8,15 @@ import cv2
 import os
 import argparse
 import sys
+import math
 
 
 def separar_frames(video_path, output_dir, frame_interval=1):
     """
     Extrae frames de un video y los guarda como imágenes.
+    
+    Los frames guardados mantienen su número original del video en el nombre
+    del archivo (ej: frame_000000.jpg, frame_000010.jpg con intervalo=10).
     
     Args:
         video_path (str): Ruta al archivo de video
@@ -48,8 +52,8 @@ def separar_frames(video_path, output_dir, frame_interval=1):
     total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
     fps = video.get(cv2.CAP_PROP_FPS)
     
-    # Calcular frames a extraer correctamente
-    frames_a_extraer = (total_frames + frame_interval - 1) // frame_interval
+    # Calcular frames a extraer
+    frames_a_extraer = math.ceil(total_frames / frame_interval)
     
     print(f"\nInformación del video:")
     print(f"  - Total de frames: {total_frames}")
